@@ -20,6 +20,7 @@
 		409AF9DC22C3C9D7009942E7 /* BViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409AF9DB22C3C9D7009942E7 /* BViewController.swift */; };
 		409AF9DE22C3C9F7009942E7 /* CViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409AF9DD22C3C9F7009942E7 /* CViewController.swift */; };
 		409AF9E022C3CA07009942E7 /* C.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409AF9DF22C3CA07009942E7 /* C.storyboard */; };
+		40E8C17A22DC41A8003F6EBD /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E8C17922DC41A8003F6EBD /* SampleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		409AF9DB22C3C9D7009942E7 /* BViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BViewController.swift; sourceTree = "<group>"; };
 		409AF9DD22C3C9F7009942E7 /* CViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CViewController.swift; sourceTree = "<group>"; };
 		409AF9DF22C3CA07009942E7 /* C.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = C.storyboard; sourceTree = "<group>"; };
+		40E8C17922DC41A8003F6EBD /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		409AF9B622C3C258009942E7 /* iOS-Practice-Team-Working */ = {
 			isa = PBXGroup;
 			children = (
+				40E8C17822DC4180003F6EBD /* New Group */,
 				409AF9D422C3C8D8009942E7 /* sceneC */,
 				409AF9D322C3C8C4009942E7 /* sceneB */,
 				409AF9D222C3C8A7009942E7 /* sceneA */,
@@ -118,6 +121,14 @@
 				409AF9DF22C3CA07009942E7 /* C.storyboard */,
 			);
 			path = sceneC;
+			sourceTree = "<group>";
+		};
+		40E8C17822DC4180003F6EBD /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				40E8C17922DC41A8003F6EBD /* SampleModel.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 				409AF9BA22C3C258009942E7 /* ViewController.swift in Sources */,
 				409AF9DC22C3C9D7009942E7 /* BViewController.swift in Sources */,
 				409AF9DE22C3C9F7009942E7 /* CViewController.swift in Sources */,
+				40E8C17A22DC41A8003F6EBD /* SampleModel.swift in Sources */,
 				409AF9B822C3C258009942E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
