@@ -26,9 +26,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHp-pb-jh6">
-                                <rect key="frame" x="152" y="427" width="46" height="30"/>
+                                <rect key="frame" x="120" y="432" width="134" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Back To Main Menu"/>
                                 <connections>
                                     <segue destination="taq-F2-1KN" kind="presentation" id="rlK-eb-hhG"/>
                                 </connections>
