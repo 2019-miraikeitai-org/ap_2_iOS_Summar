@@ -8,27 +8,28 @@
 
 import Foundation
 import Alamofire
-// サービス企画書 6 APIの構造体
 
-// request params
 
+// サービス企画書 6 API 用の構造体
 struct Position:Codable {
     let latitude:Float
     let longitude:Float
 }
 
+// サービス企画書 6 API 用の構造体
 struct UserData:Codable {
     let id:String
     let position:Position
 }
 
+// サービス企画書 6 API 用の構造体
 struct PostData:Codable {
     let genre:String
     let sukimaTime:Int
     let userData:UserData
 }
 
-// result params
+// サービス企画書 6 API 用の構造体
 struct LocationData:Codable {
     let position:Position
     let sukimatime:Int
@@ -36,14 +37,14 @@ struct LocationData:Codable {
     let genre:String
 }
 
+// サービス企画書 6 API 用の構造体
 struct Result:Codable {
     let locationData:[LocationData]
 }
 
 // Sample
 // https://github.com/2019-miraikeitai-org/ap_2_iOS_Alamofire-Practice
-// これに使ったパラメータの構造体化
-
+// Alamofire-Practiceに使ったパラメータの構造体化
 struct PracticeRequestParam:Codable {
     let key:String
     let message:String
@@ -57,16 +58,17 @@ struct PracticeResultParam:Codable {
 
 
 
-// リクエストと結果の構造体を結びつける構造体
+// リクエストと結果の構造体を結びつけるプロトコル
+// これにより、めっちゃ型安全かつ簡単にJSONが扱える・・・・はず
 protocol Communicator{
-    associatedtype REQUEST:Codable
-    associatedtype RESULT:Codable
+    associatedtype REQUEST:Codable // Codableを継承している型がREQUESTに入るよ！
+    associatedtype RESULT:Codable // Codableを継承している型がRESULTに入るよ！ (ジェネリクス swift でググれば多分理解できる)
     var endpointUrl:String {get}
     var request:REQUEST {get}
-    var result:RESULT {get}
+    var result:RESULT? {get}
     var method:HTTPMethod {get}
 }
-
+// requestメソッドは一々定義したくないのでextensionで実装
 extension Communicator {
     func request(completion: @escaping (RESULT?,String?) -> Void) {
         let headers: HTTPHeaders = [
@@ -98,47 +100,9 @@ extension Communicator {
 }
 
 
-class ServerController {
-    private let baseUrl:String
-    private let headers: HTTPHeaders = [
-        "Content-Type":"application/json"
-    ]
-    init(){
-        let env = ProcessInfo.processInfo.environment
-        guard let endpointUrl = env["ENDPOINT_URL"] else {
-            fatalError(".env reading failed: endpointUrl is nil")
-        }
-        self.baseUrl = endpointUrl
-    }
-    
-    // テスト用関数 (実際の開発では削除予定)
-    func practiceRequest(p:PracticeRequestParam,additionalUrl: String = "",completion: @escaping (String) -> Void) {
-        do {
-            let d = try p.asDictionary()
-            let url = self.baseUrl + additionalUrl
-            AF.request(url,method: .post, parameters: d, encoding: JSONEncoding.default,headers: self.headers).responseString {
-                response in
-                switch response.result {
-                case .success(let val):
-                    completion(val)
-                case .failure(let err):
-                    completion(err.localizedDescription)
-                }
-            }
-
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-    
-    
-    
-    // Codableプロトコルを継承した構造体のみをリクエストのパラメータとして許可する。
-    // addtional URLはサーバ作成後,Enumに変更予定
 
     
-    
-}
+// Encodableの拡張、Encodableを拡張したものがCodableのため、実質Codableの拡張でもある。これはCodableプロトコルを満たす構造体をJSON(辞書型)として取得するメソッド
 extension Encodable {
     func asDictionary() throws -> [String: Any] {
         let data = try JSONEncoder().encode(self)
