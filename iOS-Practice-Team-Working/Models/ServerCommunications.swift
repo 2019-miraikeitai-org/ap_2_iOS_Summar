@@ -49,15 +49,57 @@ struct PracticeRequestParam:Codable {
     let message:String
 }
 
-struct PracticeRequestHeader:Codable {
-    
+struct PracticeResultParam:Codable {
+    let result:String
+    let reply:String
 }
 
 
 
 
+// リクエストと結果の構造体を結びつける構造体
+protocol Communicator{
+    associatedtype REQUEST:Codable
+    associatedtype RESULT:Codable
+    var endpointUrl:String {get}
+    var request:REQUEST {get}
+    var result:RESULT {get}
+    var method:HTTPMethod {get}
+}
+
+extension Communicator {
+    func request(completion: @escaping (RESULT?,String?) -> Void) {
+        let headers: HTTPHeaders = [
+            "Content-Type":"application/json"
+        ]
+        let url = self.endpointUrl
+        do {
+            AF.request(url,method: method, parameters: try self.request.asDictionary(), encoding: JSONEncoding.default,headers: headers).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    do{
+                        guard let data = response.data else {
+                            fatalError("unknown data received")
+                        }
+                        let re = try JSONDecoder().decode(RESULT.self,from: data)
+                        completion(re,nil)
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                case .failure(let err):
+                    completion(nil,err.localizedDescription)
+                }
+            }
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+}
+
+
 class ServerController {
-    private let endpointUrl:String
+    private let baseUrl:String
     private let headers: HTTPHeaders = [
         "Content-Type":"application/json"
     ]
@@ -66,13 +108,15 @@ class ServerController {
         guard let endpointUrl = env["ENDPOINT_URL"] else {
             fatalError(".env reading failed: endpointUrl is nil")
         }
-        self.endpointUrl = endpointUrl
+        self.baseUrl = endpointUrl
     }
     
-    func practiceRequest(p:PracticeRequestParam,completion: @escaping (String) -> Void) {
+    // テスト用関数 (実際の開発では削除予定)
+    func practiceRequest(p:PracticeRequestParam,additionalUrl: String = "",completion: @escaping (String) -> Void) {
         do {
             let d = try p.asDictionary()
-            AF.request(self.endpointUrl,method: .post, parameters: d, encoding: URLEncoding.default,headers: self.headers).responseString {
+            let url = self.baseUrl + additionalUrl
+            AF.request(url,method: .post, parameters: d, encoding: JSONEncoding.default,headers: self.headers).responseString {
                 response in
                 switch response.result {
                 case .success(let val):
@@ -85,8 +129,15 @@ class ServerController {
         } catch {
             fatalError(error.localizedDescription)
         }
-
     }
+    
+    
+    
+    // Codableプロトコルを継承した構造体のみをリクエストのパラメータとして許可する。
+    // addtional URLはサーバ作成後,Enumに変更予定
+
+    
+    
 }
 extension Encodable {
     func asDictionary() throws -> [String: Any] {
