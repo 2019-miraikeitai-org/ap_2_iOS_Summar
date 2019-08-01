@@ -9,11 +9,9 @@
 import UIKit
 import Alamofire
 class CViewController: UIViewController {
-    var scm: ServerController!
     var env: [String:String]!
     override func viewDidLoad() {
         super.viewDidLoad()
-        scm = ServerController()
         env = ProcessInfo.processInfo.environment
         // Do any additional setup after loading the view.
     }
