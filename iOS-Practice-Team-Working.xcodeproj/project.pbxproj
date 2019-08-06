@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		192F8BE122C9D32200D19F0A /* A.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192F8BE022C9D32200D19F0A /* A.storyboard */; };
 		19F40BA922DC44AB0022AE30 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F40BA822DC44AB0022AE30 /* File.swift */; };
+		19F40BAB22DC47C80022AE30 /* corelocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F40BAA22DC47C80022AE30 /* corelocation.swift */; };
 		409AF9B822C3C258009942E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409AF9B722C3C258009942E7 /* AppDelegate.swift */; };
 		409AF9BA22C3C258009942E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409AF9B922C3C258009942E7 /* ViewController.swift */; };
 		409AF9BD22C3C258009942E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409AF9BB22C3C258009942E7 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		192F8BE022C9D32200D19F0A /* A.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = A.storyboard; sourceTree = "<group>"; };
 		19F40BA822DC44AB0022AE30 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		19F40BAA22DC47C80022AE30 /* corelocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corelocation.swift; sourceTree = "<group>"; };
 		409AF9B422C3C258009942E7 /* iOS-Practice-Team-Working.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Practice-Team-Working.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		409AF9B722C3C258009942E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		409AF9B922C3C258009942E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				19F40BA822DC44AB0022AE30 /* File.swift */,
+				19F40BAA22DC47C80022AE30 /* corelocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				409AF9DC22C3C9D7009942E7 /* BViewController.swift in Sources */,
 				409AF9DE22C3C9F7009942E7 /* CViewController.swift in Sources */,
 				409AF9B822C3C258009942E7 /* AppDelegate.swift in Sources */,
+				19F40BAB22DC47C80022AE30 /* corelocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
