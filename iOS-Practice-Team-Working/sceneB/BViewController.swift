@@ -11,6 +11,7 @@ import UIKit
 class BViewController: UIViewController {
     
     @IBOutlet weak var MainButtonView: UIButton!
+    //新しいボタンの作成
     let button1 = UIButton()
     let button2 = UIButton()
     let button3 = UIButton()
@@ -74,6 +75,8 @@ class BViewController: UIViewController {
         
         self.view.addSubview(target)
         
+        
+        //指定した番号の操作を行うように設定（改善が全然あり）
         
         if number == 1 {
         target.addTarget(self, action: #selector(self.pushButton1), for: .touchUpInside)

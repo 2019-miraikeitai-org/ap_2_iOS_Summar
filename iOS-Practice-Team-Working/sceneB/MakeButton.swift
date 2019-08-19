@@ -10,7 +10,7 @@ import UIKit
 class newbutton : NSObject {
     class func  makebutton (original : UIButton , target :UIButton)   {
         
-        
+        //mainボタンの座標及び幅を取得する
         let target_x = original.frame.origin.x
         let target_y = original.frame.origin.y
         let target_size = original.frame.size.width
@@ -51,27 +51,28 @@ class newbutton : NSObject {
     
 
     
-    //mainボタンを押したら飛び出すアニメーションの追加
+    //mainボタンを押したらmainボタンの後ろから出てくるアニメーションの追加
     class func animation  (animation : UIButton ,buttonNumber : Int) {
         
+        //アニメーションするボタンの座標をmainボタンの後ろに配置
         animation.center = CGPoint(x:animation.frame.origin.x + (animation.frame.size.width * 0.5), y:animation.frame.origin.y + (animation.frame.size.width * 0.5))
         
+        //１番目のボタンの移動を記述
         if buttonNumber == 1
         {
             UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += -20; animation.center.y += -100}, completion: nil)
-            
         }
-        
+        //２番目のボタンの移動を記述
         if  buttonNumber == 2
         {
             UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 50.0; animation.center.y += -95.0}, completion: nil)
         }
-        
+        //３番目のボタンの移動を記述
         if  buttonNumber == 3
         {
             UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 94.0; animation.center.y += -40.0}, completion: nil)
         }
-        
+        //４番目のボタンの移動を記述
         if buttonNumber == 4
         {
             UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 88.0; animation.center.y += 30.0}, completion: nil)
@@ -80,7 +81,7 @@ class newbutton : NSObject {
         
     }
     
-    //mainボタンを押したら戻るアニメーションの追加
+    //mainボタンを押したらmainボタンの後ろに戻るアニメーションの追加
     class func ranimation  (animation : UIButton ,buttonNumber :Int) {
         
         animation.center = CGPoint(x:animation.frame.origin.x + (animation.frame.size.width * 0.5), y:animation.frame.origin.y + (animation.frame.size.width * 0.5))
