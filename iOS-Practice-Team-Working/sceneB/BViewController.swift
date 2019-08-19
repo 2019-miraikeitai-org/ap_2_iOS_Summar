@@ -9,65 +9,56 @@
 import UIKit
 
 class BViewController: UIViewController {
-
+    
+    @IBOutlet weak var MainButtonView: UIButton!
+    let button1 = UIButton()
+    let button2 = UIButton()
+    let button3 = UIButton()
+    let button4 = UIButton()
+    
     override func viewDidLoad() {
+        newbutton.makebutton(original: MainButtonView, target :button1)
+        newbutton.makebutton(original: MainButtonView, target :button2)
+        newbutton.makebutton(original: MainButtonView, target :button3)
+        newbutton.makebutton(original: MainButtonView, target :button4)
+        
+        
+        //ボタンを画面に出現させ、ボタンを押した時の動作を加える
+        appearbutton(target: button1,number:1)
+        appearbutton(target: button2,number:2)
+        appearbutton(target: button3,number:3)
+        appearbutton(target: button4,number:4)
+        
         super.viewDidLoad()
-
+        
+        self.view.bringSubviewToFront(MainButtonView)
+        
         // Do any additional setup after loading the view.
     }
     
-    @IBOutlet weak var Botton1view: UIButton!
-    @IBOutlet weak var Botton2view: UIButton!
-    @IBOutlet weak var Button3view: UIButton!
-    @IBOutlet weak var Button4view: UIButton!
- 
-    @IBOutlet weak var label: UILabel!
+    
+  
     
     
     var counter  = 0
-    let Mypoint:CGPoint = CGPoint(x:78 ,y:559)
-    let Mypoint1:CGPoint = CGPoint(x:58 ,y:459)
-    let Mypoint2:CGPoint = CGPoint(x:128 ,y:464)
-    let Mypoint3:CGPoint = CGPoint(x:172 ,y:519)
-    let Mypoint4:CGPoint = CGPoint(x:166 ,y:592)
+
     
-
-    @IBAction func startAction(_ sender: Any) {
-
-    }
+   
     @IBAction func searchButtonAction(_ sender: Any) {
         
         if counter == 0 {
-        
-        self.Botton1view.center = Mypoint
-        UIView.animate(withDuration: 0.25, delay: 0.0, animations: {self.Botton1view.center.y -= 100.0; self.Botton1view.center.x -= 20.0}, completion: nil)
-            
-        
-        self.Botton2view.center = Mypoint
-            UIView.animate(withDuration: 0.25, delay: 0.0,  animations: {self.Botton2view.center.y -= 95.0; self.Botton2view.center.x += 50.0} , completion: nil)
-        
-        self.Button3view.center = Mypoint
-        UIView.animate(withDuration: 0.25, delay: 0.0,  animations: {self.Button3view.center.y -= 40.0; self.Button3view.center.x += 94.0}, completion: nil)
-            
-        self.Button4view.center = Mypoint
-        UIView.animate(withDuration: 0.25, delay: 0.0,animations: {self.Button4view.center.y += 33.0; self.Button4view.center.x += 88.0}, completion: nil)
-        
+            newbutton.animation(animation : button1 , buttonNumber: 1)
+            newbutton.animation(animation : button2 , buttonNumber: 2)
+            newbutton.animation(animation : button3 , buttonNumber: 3)
+            newbutton.animation(animation : button4 , buttonNumber: 4)
+ 
+
         }
         else {
-            self.Botton1view.center = Mypoint1
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {self.Botton1view.center.y += 100.0; self.Botton1view.center.x += 20.0}, completion: nil)
-            
-            self.Botton2view.center = Mypoint2
-            UIView.animate(withDuration: 0.25, delay: 0.0,  animations: {self.Botton2view.center.y += 95.0; self.Botton2view.center.x -= 50.0} , completion: nil)
-            
-            self.Button3view.center = Mypoint3
-            UIView.animate(withDuration: 0.25, delay: 0.0,  animations: {self.Button3view.center.y += 40.0; self.Button3view.center.x -= 94.0}, completion: nil)
-            
-            self.Button4view.center = Mypoint4
-            UIView.animate(withDuration: 0.25, delay: 0.0,   animations: {self.Button4view.center.y -= 33.0; self.Button4view.center.x -= 88.0}, completion: nil)
-            
-            
-            
+            newbutton.ranimation(animation : button1 , buttonNumber: 1)
+            newbutton.ranimation(animation : button2 , buttonNumber: 2)
+            newbutton.ranimation(animation : button3 , buttonNumber: 3)
+            newbutton.ranimation(animation : button4 , buttonNumber: 4)
         }
         
         counter += 1
@@ -75,33 +66,54 @@ class BViewController: UIViewController {
         if counter == 2 {counter = 0}
         
         
-    
-    }
-    
-    @IBAction func Button1Action(_ sender: Any) {
-        label.text = "b1 push!!"
-    }
-    @IBAction func Button2Action(_ sender: Any) {
-         label.text = "b2 push!!"
-    }
-    
-    @IBAction func Button3Action(_ sender: Any) {
-         label.text = "b3 push!!"
-    }
-    
-    @IBAction func Button4Action(_ sender: Any) {
-         label.text = "b4 push!!"
+        
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func appearbutton (target :UIButton , number:Int){
+        
+        self.view.addSubview(target)
+        
+        
+        if number == 1 {
+        target.addTarget(self, action: #selector(self.pushButton1), for: .touchUpInside)
+        }
+        
+        if number == 2 {
+            target.addTarget(self, action: #selector(self.pushButton2), for: .touchUpInside)
+        }
+        if number == 3 {
+            target.addTarget(self, action: #selector(self.pushButton3), for: .touchUpInside)
+        }
+        
+        if number == 4 {
+            target.addTarget(self, action: #selector(self.pushButton4), for: .touchUpInside)
+        }
+    
     }
-    */
-
+    
+    
+    
+    //各ボタンを押した時の操作を記述
+    
+    @objc func pushButton1(sender: UIButton){
+        print("1 pushed")
+        
+    }
+    
+    @objc func pushButton2(sender: UIButton){
+        print("2 pushed")
+        
+    }
+    
+    @objc func pushButton3(sender: UIButton){
+        print("3 pushed")
+        
+    }
+    
+    @objc func pushButton4(sender: UIButton){
+        print("4 pushed")
+        
+    }
+    
 }
