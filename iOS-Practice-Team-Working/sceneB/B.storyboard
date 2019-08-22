@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJR-O4-Jlc">
-                                <rect key="frame" x="87" y="381" width="80" height="80"/>
+                                <rect key="frame" x="50" y="497" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.24713992373150173" green="0.96620899438858032" blue="0.0041070290694048429" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="1" green="0.35976440970000001" blue="0.1721597735" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -46,7 +46,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="searchButtonAction:" destination="oEx-Jn-opi" eventType="touchUpInside" id="2jh-9L-Z8h"/>
+                                    <action selector="MainButtonAction:" destination="oEx-Jn-opi" eventType="touchUpInside" id="m14-q9-9uN"/>
                                 </connections>
                             </button>
                         </subviews>

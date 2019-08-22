@@ -10,25 +10,40 @@ import UIKit
 
 class BViewController: UIViewController {
     
+    //ボタンは大きくmainbuttonとsubbuttonの二つに別れる
+    //mainbuttonを押すとsubbuttonが現れるようになる
+    //mainbuttonはstoryboard上で作る
+    //subbuttonはstoryboardでは作らず、コードで作る
+    
+    
     @IBOutlet weak var MainButtonView: UIButton!
-    //新しいボタンの作成
-    let button1 = UIButton()
-    let button2 = UIButton()
-    let button3 = UIButton()
-    let button4 = UIButton()
+    
+    
+    //ここに新しいボタンの数countbuttonとその数だけUIButtonとidを持つ構造体SuButtonを定義する
+    //buttonnumberはanimationして現れたとき左上から時計周りの順番で１から定義する
+    let countbuttonn = 4
+    let subbutton1 = SubButton( SubButtonUI: UIButton(), buttonnumber: 1)
+    let subbutton2 = SubButton( SubButtonUI: UIButton(), buttonnumber: 2)
+    let subbutton3 = SubButton( SubButtonUI: UIButton(), buttonnumber: 3)
+    let subbutton4 = SubButton( SubButtonUI: UIButton(), buttonnumber: 4)
     
     override func viewDidLoad() {
-        newbutton.makebutton(original: MainButtonView, target :button1)
-        newbutton.makebutton(original: MainButtonView, target :button2)
-        newbutton.makebutton(original: MainButtonView, target :button3)
-        newbutton.makebutton(original: MainButtonView, target :button4)
+        
+    //MakeButton.swift内に記述のnewbuttonクラスのmakebutton関数
+    //ボタンの初期設定を行う
+    //originalにはmainbuttonのUIviewを、targetには新しいsubbuttonのUIviewを引数にする
+        newbutton.makebutton(original: MainButtonView, target :subbutton1.SubButtonUI)
+        newbutton.makebutton(original: MainButtonView, target :subbutton2.SubButtonUI)
+        newbutton.makebutton(original: MainButtonView, target :subbutton3.SubButtonUI)
+        newbutton.makebutton(original: MainButtonView, target :subbutton4.SubButtonUI)
         
         
-        //ボタンを画面に出現させ、ボタンを押した時の動作を加える
-        appearbutton(target: button1,number:1)
-        appearbutton(target: button2,number:2)
-        appearbutton(target: button3,number:3)
-        appearbutton(target: button4,number:4)
+        //ボタンを画面に出現させ、ボタンを押した時の動作を加える関数
+        //これはviewcontroller.swift内に関数が記述されている
+        appearbutton(target: subbutton1.SubButtonUI,number:subbutton1.buttonnumber)
+        appearbutton(target: subbutton2.SubButtonUI,number:subbutton2.buttonnumber)
+        appearbutton(target: subbutton3.SubButtonUI,number:subbutton3.buttonnumber)
+        appearbutton(target: subbutton4.SubButtonUI,number:subbutton4.buttonnumber)
         
         super.viewDidLoad()
         
@@ -41,43 +56,44 @@ class BViewController: UIViewController {
   
     
     
-    var counter  = 0
+    var counter :Float  = -1.0
 
     
-   
-    @IBAction func searchButtonAction(_ sender: Any) {
+   //mainbuttonが押された時の内容がここに記述される
+    @IBAction func MainButtonAction(_ sender: Any) {
+
+        //mainbuttonが奇数回目押されたときはanimation関数を、偶数回数目押されたときはranimation関数を呼ぶ
         
-        if counter == 0 {
-            newbutton.animation(animation : button1 , buttonNumber: 1)
-            newbutton.animation(animation : button2 , buttonNumber: 2)
-            newbutton.animation(animation : button3 , buttonNumber: 3)
-            newbutton.animation(animation : button4 , buttonNumber: 4)
+        //奇数回目に押された時はsubbuttonがmainbuttonの後ろから現れるアニメーションをするようにする
+     
+        //MakeButton.swift内に記述のnewbuttonクラスのanimation関数
+            newbutton.animation(animation : subbutton1.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton1.buttonnumber , Counter :counter)
+        newbutton.animation(animation : subbutton2.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton2.buttonnumber, Counter: counter)
+        newbutton.animation(animation : subbutton3.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton3.buttonnumber, Counter: counter)
+        newbutton.animation(animation : subbutton4.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton4.buttonnumber, Counter: counter)
  
 
-        }
-        else {
-            newbutton.ranimation(animation : button1 , buttonNumber: 1)
-            newbutton.ranimation(animation : button2 , buttonNumber: 2)
-            newbutton.ranimation(animation : button3 , buttonNumber: 3)
-            newbutton.ranimation(animation : button4 , buttonNumber: 4)
-        }
+
+            
+//mainbuttonが偶数回目に押された時はsubbuttonがmainbuttonの後ろへ隠れるアニメーションをするようにする
+    
+        //Mainbuttonの押された回数が奇数か偶数を測定してるところ
+        counter += 2.0
         
-        counter += 1
-        
-        if counter == 2 {counter = 0}
-        
-        
-        
+        if counter == 3.0 {counter = -1.0}
     }
     
     
+    
+    
+    //画面上にsubbuttonが現れるようにする関数
+    //MakeButton.swiftのnewbuttonクラス内にこの関数を入れたかったけどエラーが出たのでここに記述
     func appearbutton (target :UIButton , number:Int){
         
         self.view.addSubview(target)
         
         
-        //指定した番号の操作を行うように設定（改善が全然あり）
-        
+//subbuttonを押した時に動く関数pushbutton*(1~4)をsubbuttonと紐付ける処理
         if number == 1 {
         target.addTarget(self, action: #selector(self.pushButton1), for: .touchUpInside)
         }
@@ -97,7 +113,7 @@ class BViewController: UIViewController {
     
     
     
-    //各ボタンを押した時の操作を記述
+    //各ボタンを押した時の操作をここに記述する
     
     @objc func pushButton1(sender: UIButton){
         print("1 pushed")

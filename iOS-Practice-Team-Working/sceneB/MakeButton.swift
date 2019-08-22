@@ -1,20 +1,27 @@
-//ここで新しいボタンの作成およびアニメーションの動作を記述してあります
-
-
+//ここで新しいボタンの作成およびアニメーションの動作を記述してます
 
 import Foundation
 import UIKit
 
 
-//新しいボタンの作成
-class newbutton : NSObject {
+//subボタンについてのクラス
+
+struct SubButton {
+    var SubButtonUI = UIButton()
+    var buttonnumber : Int
+    
+}
+
+class newbutton  {
+    
+    //subボタンに基本的な形を与える関数
+    //この関数使えば丸いボタンがmainbuttonの後ろに配置されるようになっている
     class func  makebutton (original : UIButton , target :UIButton)   {
         
         //mainボタンの座標及び幅を取得する
         let target_x = original.frame.origin.x
         let target_y = original.frame.origin.y
         let target_size = original.frame.size.width
-        
         
         //表示されるテキスト
         target.setTitle("tap me" , for: .normal)
@@ -29,10 +36,12 @@ class newbutton : NSObject {
         target.setTitleColor(UIColor.red, for: .highlighted)
         
         //サイズ
+        //mainbuttonより若干小さくなるようになってる
         target.frame = CGRect(x: (target_x + target_size * 0.5), y: (target_y + target_size * 0.5), width: 60 , height: 60 )
         
         
         //配置場所
+        //これはmainbuttonの後ろに来るようになっている
         target.layer.position = CGPoint(x:( target_x + target_size * 0.5)  , y:(target_y + target_size * 0.5))
         
         //背景色
@@ -44,71 +53,43 @@ class newbutton : NSObject {
         //ボーダー幅
         target.layer.borderWidth = 1
         
-        
- 
-        
     }
     
 
     
-    //mainボタンを押したらmainボタンの後ろから出てくるアニメーションの追加
-    class func animation  (animation : UIButton ,buttonNumber : Int) {
+//mainボタンを押したらmainボタンの後ろに戻るアニメーションの追加
+//mainbuttonが奇数回目に押された時はsubbuttonがmainbuttonの後ろから現れるアニメーションをするようになる
+//mainbuttonが偶数回目に押された時はsubbuttonがmainbuttonの後ろへ隠れるアニメーションをするようになる
+//三角関数使ってボタンの移動を行っている。subbuttonの個数を変更してもうまくアニメーションされるはず
+    class func animation  (animation : UIButton ,Countbutton : Int ,buttonNumber : Int , Counter: Float) {
         
-        //アニメーションするボタンの座標をmainボタンの後ろに配置
+        //アニメーションするsubボタンの座標を取得
         animation.center = CGPoint(x:animation.frame.origin.x + (animation.frame.size.width * 0.5), y:animation.frame.origin.y + (animation.frame.size.width * 0.5))
         
-        //１番目のボタンの移動を記述
-        if buttonNumber == 1
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += -20; animation.center.y += -100}, completion: nil)
-        }
-        //２番目のボタンの移動を記述
-        if  buttonNumber == 2
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 50.0; animation.center.y += -95.0}, completion: nil)
-        }
-        //３番目のボタンの移動を記述
-        if  buttonNumber == 3
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 94.0; animation.center.y += -40.0}, completion: nil)
-        }
-        //４番目のボタンの移動を記述
-        if buttonNumber == 4
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += 88.0; animation.center.y += 30.0}, completion: nil)
-            
-        }
         
+        let size :Float = 90.0 //飛び出す大きさの目安
+        let rad :Float = (5.0/6.0 * Float.pi / Float((Countbutton - 1)) * Float((Countbutton - buttonNumber))) //動き出す角度を計算する
+        //x方向に動く大きさを記述
+        //奇数回目のときはCounterに渡される値は-1で、偶数回目のときはCounterは1で方向を逆にしている
+        let chenge_x :CGFloat = CGFloat(Counter * size * -cos(rad - (Float.pi / 6.0)))
+        
+        //ｙ方向に動く大きさを記述
+        //奇数回目のときはCounterに渡される値は-1で、偶数回目のときはCounterは1で方向を逆にしている
+        let chenge_y :CGFloat = CGFloat(Counter * size * sin(rad - (Float.pi / 6.0)))
+
+ 
+      //animationさせる
+        UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += chenge_x ; animation.center.y += chenge_y}, completion: nil)
+
     }
     
-    //mainボタンを押したらmainボタンの後ろに戻るアニメーションの追加
-    class func ranimation  (animation : UIButton ,buttonNumber :Int) {
-        
-        animation.center = CGPoint(x:animation.frame.origin.x + (animation.frame.size.width * 0.5), y:animation.frame.origin.y + (animation.frame.size.width * 0.5))
-        
-        if buttonNumber == 1
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x -= -20; animation.center.y -= -100}, completion: nil)
-            
-        }
-        
-        if  buttonNumber == 2
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x -= 50.0; animation.center.y -= -95.0}, completion: nil)
-        }
-        
-        if  buttonNumber == 3
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x -= 94.0; animation.center.y -= -40.0}, completion: nil)
-        }
-        
-        if buttonNumber == 4
-        {
-            UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x -= 88.0; animation.center.y -= 30.0}, completion: nil)
-            
-        }
-        
-    }
+    
+    
+//mainボタンを押したらmainボタンの後ろに戻るアニメーションの追加
+//mainbuttonが奇数回目に押された時はsubbuttonがmainbuttonの後ろから現れるアニメーションをするようになる
+//mainbuttonが偶数回目に押された時はsubbuttonがmainbuttonの後ろへ隠れるアニメーションをするようになる
+//奇数回目のときは
+
     
 }
 
