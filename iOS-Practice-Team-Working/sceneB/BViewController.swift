@@ -62,22 +62,15 @@ class BViewController: UIViewController {
    //mainbuttonが押された時の内容がここに記述される
     @IBAction func MainButtonAction(_ sender: Any) {
 
-        //mainbuttonが奇数回目押されたときはanimation関数を、偶数回数目押されたときはranimation関数を呼ぶ
-        
-        //奇数回目に押された時はsubbuttonがmainbuttonの後ろから現れるアニメーションをするようにする
-     
-        //MakeButton.swift内に記述のnewbuttonクラスのanimation関数
+       
+    //MakeButton.swift内に記述のnewbuttonクラスのanimation関数でアニメーションできるようにする
             newbutton.animation(animation : subbutton1.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton1.buttonnumber , Counter :counter)
         newbutton.animation(animation : subbutton2.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton2.buttonnumber, Counter: counter)
         newbutton.animation(animation : subbutton3.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton3.buttonnumber, Counter: counter)
         newbutton.animation(animation : subbutton4.SubButtonUI, Countbutton: countbuttonn,buttonNumber: subbutton4.buttonnumber, Counter: counter)
  
 
-
-            
-//mainbuttonが偶数回目に押された時はsubbuttonがmainbuttonの後ろへ隠れるアニメーションをするようにする
-    
-        //Mainbuttonの押された回数が奇数か偶数を測定してるところ
+//Mainbuttonの押された回数が奇数か偶数を測定するところ
         counter += 2.0
         
         if counter == 3.0 {counter = -1.0}
@@ -91,9 +84,8 @@ class BViewController: UIViewController {
     func appearbutton (target :UIButton , number:Int){
         
         self.view.addSubview(target)
-        
-        
-//subbuttonを押した時に動く関数pushbutton*(1~4)をsubbuttonと紐付ける処理
+
+//subbuttonを押した時に動く関数pushbutton*(1~4)をsubbuttonと紐付ける処理？
         if number == 1 {
         target.addTarget(self, action: #selector(self.pushButton1), for: .touchUpInside)
         }
@@ -114,7 +106,6 @@ class BViewController: UIViewController {
     
     
     //各ボタンを押した時の操作をここに記述する
-    
     @objc func pushButton1(sender: UIButton){
         print("1 pushed")
         

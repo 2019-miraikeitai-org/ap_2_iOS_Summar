@@ -82,14 +82,5 @@ class newbutton  {
         UIView.animate(withDuration: 0.25, delay: 0.0, animations: {animation.center.x += chenge_x ; animation.center.y += chenge_y}, completion: nil)
 
     }
-    
-    
-    
-//mainボタンを押したらmainボタンの後ろに戻るアニメーションの追加
-//mainbuttonが奇数回目に押された時はsubbuttonがmainbuttonの後ろから現れるアニメーションをするようになる
-//mainbuttonが偶数回目に押された時はsubbuttonがmainbuttonの後ろへ隠れるアニメーションをするようになる
-//奇数回目のときは
-
-    
 }
 
